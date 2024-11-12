@@ -22,6 +22,9 @@ public class Reservation {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @Enumerated(EnumType.STRING)
+    private CarType carType;
+
     @NotBlank
     @Size(min = 3, message = "Car Type cannot be less than 3 Characters")
     @Enumerated(EnumType.STRING)
