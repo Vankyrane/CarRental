@@ -26,7 +26,3 @@ public class Car {
 
 }
 
-enum CarType {
-    SEDAN, SUV, VAN
-}
-
