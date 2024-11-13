@@ -4,6 +4,7 @@ import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
 import com.car_rental.project.payload.CarDTO;
+import com.car_rental.project.payload.CarReservationDTO;
 import com.car_rental.project.repository.CarRepository;
 import com.car_rental.project.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
