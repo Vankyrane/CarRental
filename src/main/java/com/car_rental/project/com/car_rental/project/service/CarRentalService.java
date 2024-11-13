@@ -11,41 +11,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Optional;
 
-@Service
-public class CarRentalService {
+public interface CarRentalService {
 
-    @Autowired
-    private CarRepository carRepository;
+    Reservation reserveCar(CarType carType, LocalDate startDate, int numberOfDays);
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-
-    public Reservation reserveCar(CarType carType, LocalDate startDate, int numberOfDays){
-        Optional<Car> availableCar = carRepository.findFirstByTypeAndIsAvailable(carType, true);
-
-        if(availableCar.isPresent()){
-            Car car = availableCar.get();
-            car.setAvailable(false);
-            carRepository.save(car);
-
-            Reservation reservation = new Reservation();
-            reservation.setCarType(carType);
-            reservation.setCar(car);
-            reservation.setStartDate(startDate);
-            reservation.setEndDate(startDate.plusDays(numberOfDays));
-
-            return reservationRepository.save(reservation);
-        }else{
-            throw  new RuntimeException("No cars available for the selected car type");
-        }
-    }
-    public Car returnCar(Long reservationId){
-        Reservation reservation = reservationRepository.findById(reservationId)
-                .orElseThrow(() -> new RuntimeException("Reservation not Found"));
-
-        Car car = reservation.getCar();
-        car.setAvailable(true);
-        carRepository.save(car);
-        return car;
-    }
+    Car returnCar(Long reservationId);
 }
