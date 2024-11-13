@@ -21,5 +21,5 @@ public interface CarRentalService {
 
     List<CarDTO> getAllCars();
 
-    Car returnCar(Long reservationId);
+    CarDTO returnCar(Long reservationId);
 }

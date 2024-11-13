@@ -43,9 +43,9 @@ public class CarRentalController {
     }
 
     @PostMapping("/return/{reservationId}")
-    public ResponseEntity<Car> returnCar(@PathVariable Long reservationId){
-        Car car = carRentalService.returnCar(reservationId);
-        return new ResponseEntity<>(car, HttpStatus.OK);
+    public ResponseEntity<CarDTO> returnCar(@PathVariable Long reservationId){
+        CarDTO CarDTOFromService = carRentalService.returnCar(reservationId);
+        return new ResponseEntity<>(CarDTOFromService, HttpStatus.OK);
     }
 
 }

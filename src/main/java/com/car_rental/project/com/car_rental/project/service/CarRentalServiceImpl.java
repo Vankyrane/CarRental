@@ -4,6 +4,7 @@ import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
 import com.car_rental.project.payload.CarDTO;
+import com.car_rental.project.payload.CarReservationDTO;
 import com.car_rental.project.repository.CarRepository;
 import com.car_rental.project.repository.ReservationRepository;
 import org.modelmapper.ModelMapper;
@@ -66,13 +67,14 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
-    public Car returnCar(Long reservationId){
+    public CarDTO returnCar(Long reservationId){
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new RuntimeException("Reservation not Found"));
 
         Car car = reservation.getCar();
         car.setAvailable(true);
         carRepository.save(car);
-        return car;
+        CarDTO carDTO = modelMapper.map(car, CarDTO.class);
+        return carDTO;
     }
 }
