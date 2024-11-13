@@ -25,11 +25,6 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private CarType carType;
 
-    @NotBlank
-    @Size(min = 3, message = "Car Type cannot be less than 3 Characters")
-    @Enumerated(EnumType.STRING)
-    private CarType type;
-
     @ManyToOne
     private Car car;
 
