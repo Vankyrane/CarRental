@@ -3,12 +3,15 @@ package com.car_rental.project.com.car_rental.project.service;
 import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
+import com.car_rental.project.payload.CarDTO;
 import com.car_rental.project.repository.CarRepository;
 import com.car_rental.project.repository.ReservationRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +19,9 @@ public class CarRentalServiceImpl implements CarRentalService {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -40,6 +46,16 @@ public class CarRentalServiceImpl implements CarRentalService {
             throw  new RuntimeException("No cars available for the selected car type");
         }
     }
+
+    @Override
+   public Car addCar(Car car){
+         return carRepository.save(car);
+   }
+
+   @Override
+   public List<Car> getAllCars(){
+        return carRepository.findAll();
+   }
 
     @Override
     public Car returnCar(Long reservationId){

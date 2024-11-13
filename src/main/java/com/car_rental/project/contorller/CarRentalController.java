@@ -4,12 +4,16 @@ import com.car_rental.project.com.car_rental.project.service.CarRentalService;
 import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
+import com.car_rental.project.payload.CarDTO;
+import com.car_rental.project.payload.CarReservationDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/carrental")
@@ -17,6 +21,16 @@ public class CarRentalController {
 
     @Autowired
     private CarRentalService carRentalService;
+
+    @PostMapping("/addCar")
+    public Car addCar (@Valid @RequestBody Car car) {
+        return carRentalService.addCar(car);
+    }
+
+    @GetMapping("/cars")
+    public List<Car> getAllCars() {
+        return carRentalService.getAllCars();
+    }
     
     @PostMapping("/reserve")
     public ResponseEntity<Reservation> reserveCar(@RequestParam CarType carType,
