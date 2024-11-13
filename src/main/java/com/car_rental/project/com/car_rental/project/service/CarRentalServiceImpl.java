@@ -41,7 +41,6 @@ public class CarRentalServiceImpl implements CarRentalService {
             reservation.setCar(car);
             reservation.setStartDate(startDate);
             reservation.setEndDate(startDate.plusDays(numberOfDays));
-
             return reservationRepository.save(reservation);
         }else{
             throw  new RuntimeException("No cars available for the selected car type");
