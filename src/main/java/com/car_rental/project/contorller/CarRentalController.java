@@ -23,13 +23,13 @@ public class CarRentalController {
     private CarRentalService carRentalService;
 
     @PostMapping("/addCar")
-    public Car addCar (@Valid @RequestBody Car car) {
-        return carRentalService.addCar(car);
+    public ResponseEntity<Car> addCar (@Valid @RequestBody Car car) {
+        return new ResponseEntity<>(carRentalService.addCar(car), HttpStatus.OK) ;
     }
 
     @GetMapping("/cars")
-    public List<Car> getAllCars() {
-        return carRentalService.getAllCars();
+    public ResponseEntity<List<Car>> getAllCars() {
+        return new ResponseEntity<>(carRentalService.getAllCars(), HttpStatus.OK);
     }
     
     @PostMapping("/reserve")
