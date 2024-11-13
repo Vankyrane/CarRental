@@ -5,7 +5,6 @@ import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
 import com.car_rental.project.payload.CarDTO;
-import com.car_rental.project.payload.CarReservationDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,13 +22,15 @@ public class CarRentalController {
     private CarRentalService carRentalService;
 
     @PostMapping("/addCar")
-    public ResponseEntity<Car> addCar (@Valid @RequestBody Car car) {
-        return new ResponseEntity<>(carRentalService.addCar(car), HttpStatus.OK) ;
+    public ResponseEntity<CarDTO> addCar (@Valid @RequestBody CarDTO carDTO) {
+        CarDTO carDTOFromService = carRentalService.addCar(carDTO);
+        return new ResponseEntity<>(carDTOFromService, HttpStatus.OK) ;
     }
 
     @GetMapping("/cars")
-    public ResponseEntity<List<Car>> getAllCars() {
-        return new ResponseEntity<>(carRentalService.getAllCars(), HttpStatus.OK);
+    public ResponseEntity<List<CarDTO>> getAllCars() {
+        List<CarDTO> carDTOFromService = carRentalService.getAllCars();
+        return new ResponseEntity<>(carDTOFromService, HttpStatus.OK);
     }
     
     @PostMapping("/reserve")

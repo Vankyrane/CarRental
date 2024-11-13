@@ -17,9 +17,9 @@ public interface CarRentalService {
 
     Reservation reserveCar(CarType carType, LocalDate startDate, int numberOfDays);
 
-    Car addCar(Car car);
+    CarDTO addCar(CarDTO carDTO);
 
-    List<Car> getAllCars();
+    List<CarDTO> getAllCars();
 
     Car returnCar(Long reservationId);
 }

@@ -28,10 +28,10 @@ public class CarRentalServiceImpl implements CarRentalService {
 
     @Override
     public Reservation reserveCar(CarType carType, LocalDate startDate, int numberOfDays){
-        Optional<Car> availableCar = carRepository.findFirstByTypeAndIsAvailable(carType, true);
+        Car availableCar = carRepository.findFirstByTypeAndIsAvailable(carType, true);
 
-        if(availableCar.isPresent()){
-            Car car = availableCar.get();
+        if(availableCar != null){
+            Car car = availableCar;
             car.setAvailable(false);
             carRepository.save(car);
 
@@ -48,14 +48,22 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
-   public Car addCar(Car car){
-         return carRepository.save(car);
+   public CarDTO addCar(CarDTO carDTO){
+        Car car = modelMapper.map(carDTO,Car.class);
+        Car carFromDB = carRepository.findFirstByTypeAndIsAvailable(carDTO.getType(), carDTO.isAvailable());
+        if(carFromDB != null){
+            throw new RuntimeException("Car with Type "+  car.getType() + " aleardy Exist");
+        }
+        Car savedCar = carRepository.save(car);
+        return modelMapper.map(savedCar, CarDTO.class);
    }
 
    @Override
-   public List<Car> getAllCars(){
-        return carRepository.findAll();
-   }
+   public List<CarDTO> getAllCars(){
+        List<Car> carList = carRepository.findAll();
+        List<CarDTO> carDTOList = carList.stream().map(car -> modelMapper.map(car,CarDTO.class)).toList();
+        return carDTOList;
+    }
 
     @Override
     public Car returnCar(Long reservationId){
