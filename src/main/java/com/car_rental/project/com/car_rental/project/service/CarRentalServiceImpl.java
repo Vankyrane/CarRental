@@ -6,7 +6,6 @@ import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
 import com.car_rental.project.payload.CarDTO;
-import com.car_rental.project.payload.CarReservationDTO;
 import com.car_rental.project.repository.CarRepository;
 import com.car_rental.project.repository.ReservationRepository;
 import org.modelmapper.ModelMapper;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarRentalServiceImpl implements CarRentalService {

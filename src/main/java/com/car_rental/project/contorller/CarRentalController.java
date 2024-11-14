@@ -1,7 +1,6 @@
 package com.car_rental.project.contorller;
 
 import com.car_rental.project.com.car_rental.project.service.CarRentalService;
-import com.car_rental.project.model.Car;
 import com.car_rental.project.model.CarType;
 import com.car_rental.project.model.Reservation;
 import com.car_rental.project.payload.CarDTO;
